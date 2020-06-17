@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<lpr:relatório id="token" xmlns:lpr="http://www.dei.isep.ipp.pt/lprog"
+               xmlns="http://www.dei.isep.ipp.pt/lprog"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://www.dei.isep.ipp.pt/lprog Relatorio.xsd">
+
+    <lpr:páginaRosto>
+        <lpr:tema>Sistema de recolha, processamento e gestão de informação de chão de fábrica</lpr:tema>
+        <lpr:disciplina id="26326">
+            <lpr:designação>Linguagens e Programação</lpr:designação>
+            <lpr:anoCurricular>2</lpr:anoCurricular>
+            <lpr:sigla>LPROG</lpr:sigla>
+        </lpr:disciplina>
+        <lpr:autor>
+            <lpr:nome>Bernardo Carvalho</lpr:nome>
+            <lpr:número>1170691</lpr:número>
+            <lpr:mail>1170691@isep.ipp.pt</lpr:mail>
+        </lpr:autor>
+        <lpr:autor>
+            <lpr:nome>Bruno Magalhães</lpr:nome>
+            <lpr:número>1180512</lpr:número>
+            <lpr:mail>1180512@isep.ipp.pt</lpr:mail>
+        </lpr:autor>
+        <lpr:autor>
+            <lpr:nome>Pedro Borda de Água</lpr:nome>
+            <lpr:número>1180809</lpr:número>
+            <lpr:mail>1180809@isep.ipp.pt</lpr:mail>
+        </lpr:autor>
+        <lpr:autor>
+            <lpr:nome>Tiago Ribeiro</lpr:nome>
+            <lpr:número>1181444</lpr:número>
+            <lpr:mail>1181444@isep.ipp.pt</lpr:mail>
+        </lpr:autor>
+        <lpr:turma>2DL</lpr:turma>
+        <lpr:professor sigla="AMD" tipoAula="T">T</lpr:professor>
+        <lpr:professor sigla="JRT" tipoAula="TP">TP</lpr:professor>
+        <lpr:professor sigla="PSM" tipoAula="PL">PL</lpr:professor>
+        <lpr:logotipoDEI>https://upload.wikimedia.org/wikipedia/commons/a/ad/Isep-logo.png</lpr:logotipoDEI>
+        <lpr:data>2020-06-14+00:00</lpr:data>
+    </lpr:páginaRosto>
+
+    <lpr:corpo id="string">
+        <lpr:introdução tituloSecção="SEC001" id="SEC001">
+            <lpr:subsecção id="SUBSEC001">Introdução</lpr:subsecção>
+            <lpr:parágrafo>
+                Este relatório é parte integrante do trabalho desenvolvido no âmbito da disciplina de
+                Linguagens e Programação, inserida no 4º semestre da Licenciatura em Engenharia Informática
+                do Instituto Superior de Engenharia do Porto, e é parte integrante da avaliação referente
+                ao último
+                <lpr:itálico> Sprint</lpr:itálico>
+                .
+            </lpr:parágrafo>
+            <lpr:parágrafo>
+                Através deste relatório esperamos demonstrar que conseguimos dar resposta total ou parcial
+                a todas as
+                <lpr:itálico>User Stories</lpr:itálico>
+                diretamente relacionadas com a disciplina de LPROG:
+            </lpr:parágrafo>
+            <lpr:listaItems>
+                <lpr:item label="string">1010: Como Gestor de Projeto, eu pretendo que a equipa especifique um
+                    documento XSD que possa ser, posteriormente, usado para validar o conteúdo XML gerado
+                    pelo sistema;
+                </lpr:item>
+                <lpr:item label="string">2007: Como Gestor de Produção, eu pretendo exportar, para um ficheiro
+                    XML, toda a informação subjacente ao chão de fábrica;
+                </lpr:item>
+                <lpr:item label="string">2013: Como Gestor de Produção, eu pretendo aplicar uma visualização/
+                    transformação a um ficheiro XML anteriormente gerado/exportado;
+                </lpr:item>
+                <lpr:item label="string">1017: Como Gestor de Projeto, eu pretendo que a equipa elabore um
+                    relatório que descreva todas as aplicações de XML, XSD, XSLT e XPATH no sistema.
+                </lpr:item>
+            </lpr:listaItems>
+            <lpr:parágrafo>
+                Este relatório divide-se em três secções: a análise do problema proposto, a definição da
+                sintaxe da linguagem definida e as transformações existentes.
+            </lpr:parágrafo>
+        </lpr:introdução>
+
+        <lpr:outrasSecções>
+            <lpr:análise tituloSecção="SEC002" id="SEC002">
+                <lpr:subsecção id="SUBSEC002">Análise</lpr:subsecção>
+                <lpr:parágrafo>
+                    Tendo por base o Caderno de Encargos que nos foi facultado, começamos por pensar na melhor
+                    forma de modo a dar resposta ao solicitado, que era o de construir uma aplicação informática
+                    que permitissem gerir o chão-de-fábrica de uma empresa.
+                </lpr:parágrafo>
+                <lpr:parágrafo>
+                    De um modo genérico, tal aplicação deveria de ser capaz de responder aos principais
+                    objetivos do Projeto:
+                </lpr:parágrafo>
+                <lpr:listaItems>
+                    <lpr:item label="string">Recolher a diversidade de dados e mensagens geradas pelas diferentes
+                        máquinas ou equipamentos que constituem o “chão de fábrica” de uma unidade industrial;
+                    </lpr:item>
+                    <lpr:item label="string">Realizar o processamento desses dados de forma a satisfazer diversas
+                        necessidades, tais como: o controlo das ordens de produção e respetiva execução; a gestão
+                        de tempo de atividade e paragem de máquinas; a gestão de consumos de matérias-primas; e,
+                        o registo de quantidades efetivamente produzidas;
+                    </lpr:item>
+                    <lpr:item label="string">Disponibilizar informação relevante a outros sistemas externos existentes
+                        na empresa;
+                    </lpr:item>
+                    <lpr:item label="string">Integrar informação útil existente nesses mesmos sistemas externos.</lpr:item>
+                </lpr:listaItems>
+                <lpr:parágrafo>
+                    Sob um ponto de vista mais específico da disciplina de LPROG, a nossa aplicação deveria
+                    de dar respostas às
+                    <lpr:itálico>User-Stories</lpr:itálico>
+                    mencionadas anteriormente.
+                </lpr:parágrafo>
+                <lpr:parágrafo>
+                    De seguida iremos abordar as respostas por nós dadas como forma de responder, primeiro,
+                    à exportação de um ficheiro no formato XML e à sua validação usando um ficheiro XSD por
+                    nós criado, e posteriormente, às transformações do ficheiro XML criado noutros formatos,
+                    tais como o HTML, JSON e texto simples/corrido.
+                </lpr:parágrafo>
+            </lpr:análise>
+
+            <lpr:linguagem tituloSecção="SEC003" id="SEC003">
+                <lpr:subsecção id="SUBSEC003">Sintaxe da linguagem definida</lpr:subsecção>
+                <lpr:parágrafo>
+                    A linguagem usada neste relatório, assim como a linguagem usada de modo a darmos resposta às
+                    <lpr:itálico>User-Stories</lpr:itálico>
+                    mencionadas anteriormente é o XML. E, de modo a validarmos o documento elaborado recorremos
+                    a um, ou vários XMLSchema (XS ou XSD).
+                </lpr:parágrafo>
+                <lpr:parágrafo>
+                    Em primeiro lugar geramos um XML automaticamente através da aplicação criada por nós, tal
+                    documento contém a informação referente ao chão-de-fábrica:
+                </lpr:parágrafo>
+                <lpr:codigo>
+                    <lpr:bloco>
+                        <![CDATA[
+                        public void outputToAFile() {
+                            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                            Transformer transformer = null;
+                            try {
+                                transformer = transformerFactory.newTransformer();
+                            } catch (TransformerConfigurationException e) {
+                                e.printStackTrace();
+                            }
+                            DOMSource source = new DOMSource(doc);
+                            StreamResult result = new StreamResult(new File("factoryInfo.xml"));
+                            // Output to console for testing
+                            //StreamResult result = new StreamResult(System.out);
+                            try {
+                                transformer.transform(source, result);
+                            } catch (TransformerException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        ]]>
+                    </lpr:bloco>
+                </lpr:codigo>
+                <lpr:parágrafo>
+                    Paralelamente, desenvolvemos um XMLSchema que deveria de validar o XML criado, de forma
+                    a comprovar que o XML havia sido bem criado.
+                </lpr:parágrafo>
+                <lpr:figura src="https://imgur.com/9hSHUQl" descrição="Excerto do ficheiro XSD construído"/>
+                <lpr:parágrafo>
+                    Como se pode ver no ficheiro
+                    <lpr:itálico> factoryInfo.xml </lpr:itálico>
+                    o qual é gerado automaticamente aquando da solicitação do mesmo, toda a informação se
+                    encontra organizada por diversos blocos, os quais se encontram todos inseridos num bloco
+                    maior denominado de
+                    <lpr:itálico> factory</lpr:itálico>
+                    , dentro desse bloco aparecem-nos os diversos constituintes do chão-de-fábrica: as máquinas
+                    <lpr:itálico> (machines)</lpr:itálico>
+                    , as matérias-primas
+                    <lpr:itálico> (rawMaterials)</lpr:itálico>
+                    , as ordens de produção
+                    <lpr:itálico> (prodOrders)</lpr:itálico>
+                    , os depósitos
+                    <lpr:itálico> (deposits)</lpr:itálico>
+                    e os diversos produtos que a fábrica produz
+                    <lpr:itálico> (products)</lpr:itálico>
+                    .
+                </lpr:parágrafo>
+                <lpr:parágrafo>
+                    Dentro de cada um destes constituintes, estão definidas as suas diversas unidades, ou
+                    seja, dentro das
+                    <lpr:itálico> machines </lpr:itálico>
+                    encontram-se as diversas máquinas e toda a sua caracterização. Tal caracterização deve
+                    ser hierárquica, ou seja, no caso dos
+                    <lpr:itálico> products </lpr:itálico>
+                    por exemplo, uma das suas características é a existência de uma ficha de produção
+                    <lpr:itálico> (billOfMaterials)</lpr:itálico>
+                    , a qual também contém diversas características, as quais são representadas de uma forma
+                    indentada.
+                </lpr:parágrafo>
+                <lpr:parágrafo>
+                    No que diz respeito ao XMLSchema desenvolvido para validar tal documento, foram tidas em
+                    atenção todos estes pormenores já mencionados, assim como foram pré-definidas algumas
+                    regras gramaticais de forma a validar as expressões utilizadas aquando da introdução dos
+                    dados, como por exemplo, aquando da introdução de datas há a regra de que o formato a
+                    validar deve ser o seguinte:
+                </lpr:parágrafo>
+                <lpr:codigo>
+                    <lpr:bloco>
+                        <![CDATA[
+                        <xsd:restriction base="xsd:date">
+	                        <xsd:pattern value="[0-9]{4}-[0-9]{2}-[0-9]{2}"/>
+                        </xsd:restriction>
+                        ]]>
+                    </lpr:bloco>
+                </lpr:codigo>
+                <lpr:parágrafo>
+                    Foram assim introduzidos alguns padrões de gramática ao longo dos constituintes do
+                    chão-de-fábrica.
+                </lpr:parágrafo>
+            </lpr:linguagem>
+
+            <lpr:transformações tituloSecção="SEC004" id="SEC004">
+                <lpr:subsecção id="SUBSEC004">Transformações</lpr:subsecção>
+                <lpr:parágrafo>
+                    Nesta parte do relatório iremos demonstrar as transformações disponibilizadas pela nossa
+                    aplicação, ou seja, a transformação de XML para HTML, para JSON e para TXT.
+                </lpr:parágrafo>
+                <lpr:parágrafo>
+                    No que diz respeito à transformação de XML para HTML definimos um ficheiro XSLT que define
+                    as regras necessárias de modo a proceder a essa transformação aquando da sua solicitação no
+                    decorrer da aplicação desenvolvida por nós.
+                </lpr:parágrafo>
+                <lpr:parágrafo>
+                    Em seguida apresentamos um excerto inicial do ficheiro xslFileForHtmlConversion.xsl:
+                </lpr:parágrafo>
+                <lpr:codigo>
+                    <lpr:bloco>
+                        <![CDATA[
+                        <?xml version="1.0"?>
+                        <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                            version="1.0">
+
+                            <xsl:template match="/">
+                                <html>
+                                    <head>
+                                        <style type="text/css">
+                                            table.tfmt {
+                                            border: 1px ;
+                                            }
+                                            td.colfmt {
+                                            border: 1px ;
+                                            background-color: white;
+                                            color: black;
+                                            text-align:right;
+                                            }
+                                            th {
+                                            background-color: #ad5202;
+                                            color: white;
+                                            }
+                                        </style>
+                                    </head>
+
+                            (...)
+                        ]]>
+                    </lpr:bloco>
+                </lpr:codigo>
+                <lpr:parágrafo>
+                    No que diz respeito à transformação de XML para JSON não foi definido um ficheiro XSLT,
+                    como era suposto, contudo usou-se uma dependência de modo a que essa transformação fosse
+                    feita diretamente pelo Java.
+                </lpr:parágrafo>
+                <lpr:parágrafo>
+                    Em seguida apresentamos o método que efetua a tal transformação:
+                </lpr:parágrafo>
+                <lpr:figura src="https://imgur.com/IVO1ZHF"
+                         descrição="Método Java utilizado na transformação do XML em JSON"/>
+                <lpr:parágrafo>
+                    No que diz respeito à transformação de XML para um ficheiro de texto corrido no formato
+                    TXT definimos também um ficheiro XSLT que define as regras necessárias de modo a proceder
+                    a essa transformação aquando da sua solicitação no decorrer da aplicação desenvolvida por
+                    nós.
+                </lpr:parágrafo>
+                <lpr:parágrafo>
+                    Em seguida apresentamos um excerto inicial do ficheiro xslFileForTxtConversion.xsl:
+                </lpr:parágrafo>
+                <lpr:codigo>
+                    <lpr:bloco>
+                        <![CDATA[
+                        <?xml version="1.0" encoding="utf-8"?>
+                        <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                        <xsl:output method="text" omit-xml-declaration="yes" indent="no"/>
+
+                        <xsl:template match="node()">
+                            <xsl:value-of select="name()"/>
+                            <xsl:text>&#xA;</xsl:text>
+                            <xsl:call-template name="loop"/>
+                        </xsl:template>
+
+                        <xsl:template name="loop">
+                        <!-- Output headers -->
+                        <xsl:for-each select="./*[count(*) = 0]">
+                            <xsl:value-of select="name()"/>
+                            <xsl:if test="position() != last()">
+                                <xsl:text>,</xsl:text>
+                            </xsl:if>
+                        </xsl:for-each>
+                        <xsl:text>&#xA;</xsl:text>
+
+                        <!-- Output values -->
+                        <xsl:for-each select="./*[count(*) = 0]">
+                            <xsl:value-of select="."/>
+                            <xsl:if test="position() != last()">
+                                <xsl:text>,</xsl:text>
+                            </xsl:if>
+                        </xsl:for-each>
+                        <xsl:text>&#xA;</xsl:text>
+
+                        (...)
+                        ]]>
+                    </lpr:bloco>
+                </lpr:codigo>
+            </lpr:transformações>
+        </lpr:outrasSecções>
+
+        <lpr:conclusão tituloSecção="SEC005" id="SEC005">
+            <lpr:subsecção id="SUBSEC005">Conclusão</lpr:subsecção>
+            <lpr:parágrafo>
+                Com este relatório esperamos ter demonstrado de que forma demos resposta às
+                <lpr:itálico>User-Stories </lpr:itálico>
+                diretamente relacionadas com a disciplina de LPROG.
+            </lpr:parágrafo>
+            <lpr:parágrafo>
+                Temos noção de que certamente existem melhorias que deveriam e poderiam ser aplicadas de
+                modo a melhorar a nossa prestação.
+            </lpr:parágrafo>
+            <lpr:parágrafo>
+                Esperamos assim ter demonstrado e aplicado parte dos conhecimentos adquiridos durante este
+                nosso percurso pelo 4º da Licenciatura em Engenharia Informática.
+            </lpr:parágrafo>
+        </lpr:conclusão>
+
+        <lpr:referências tituloSecção="SEC006" id="SEC006">
+            <lpr:refBibliográfica idRef="RefB_1">
+                <lpr:título>Ficha PL4: XML, XML Schema</lpr:título>
+                <lpr:dataPublicação>2019/2020</lpr:dataPublicação>
+                <lpr:autor>LPROG</lpr:autor>
+            </lpr:refBibliográfica>
+            <lpr:refBibliográfica idRef="RefB_2">
+                <lpr:título>Ficha PL5: XPATH, XSLT</lpr:título>
+                <lpr:dataPublicação>2019/2020</lpr:dataPublicação>
+                <lpr:autor>LPROG</lpr:autor>
+            </lpr:refBibliográfica>
+            <lpr:refWeb idRef="RefW_1">
+                <lpr:URL>https://stackoverflow.com/questions/12796433/convert-xml-to-html-using-xslt</lpr:URL>
+                <lpr:descrição>StackOverflow</lpr:descrição>
+                <lpr:consultadoEm>2020-06-09+00:00</lpr:consultadoEm>
+            </lpr:refWeb>
+            <lpr:refWeb idRef="RefW_2">
+                <lpr:URL>https://stackoverflow.com/questions/24122921/xsl-to-convert-xml-to-json</lpr:URL>
+                <lpr:descrição>StackOverflow</lpr:descrição>
+                <lpr:consultadoEm>2020-06-09+00:00</lpr:consultadoEm>
+            </lpr:refWeb>
+            <lpr:refWeb idRef="RefW_3">
+                <lpr:URL>https://stackoverflow.com/questions/8800269/xslt-to-convert-xml-to-text</lpr:URL>
+                <lpr:descrição>StackOverflow</lpr:descrição>
+                <lpr:consultadoEm>2020-06-09+00:00</lpr:consultadoEm>
+            </lpr:refWeb>
+        </lpr:referências>
+    </lpr:corpo>
+</lpr:relatório>
