@@ -1,0 +1,35 @@
+@startuml
+scale 1280*720
+actor FloorManager #lightblue
+
+FloorManager -> NotificationUI : starts consult of notification errors
+activate NotificationUI
+control NotificationController
+
+NotificationUI -> NotificationController : consultNonArchivedNotificationErrors()
+
+activate NotificationController
+NotificationController -> NotificationServices : create()
+NotificationController -> NotificationServices : consultNonArchivedNotificationErrors()
+NotificationServices -> PersistenceContext : repositories()
+deactivate NotificationController
+database RepositoryFactory #lightblue
+activate PersistenceContext
+PersistenceContext -> RepositoryFactory : create()
+deactivate PersistenceContext
+
+database NotificationRepository #lightblue
+activate RepositoryFactory
+RepositoryFactory -> NotificationRepository : create()
+deactivate RepositoryFactory
+
+NotificationServices -> NotificationRepository : consultNonArchivedNotificationErrors()
+
+NotificationUI --> NotificationUI : show()
+NotificationController --> NotificationUI :
+NotificationUI --> FloorManager : Successful Operation
+
+deactivate NotificationUI
+
+
+@enduml

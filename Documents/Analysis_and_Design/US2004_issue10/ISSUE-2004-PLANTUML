@@ -1,0 +1,65 @@
+@startuml
+scale 2048*1080
+actor FloorManager #lightblue
+
+activate SpecifyBOMUI
+FloorManager -> SpecifyBOMUI : specifyItemBOM()
+SpecifyBOMUI --> FloorManager : Requests to choose between Material or Product
+FloorManager -> SpecifyBOMUI : specifyItemBOM(type)
+
+control BOMController
+participant PersistenceContext
+database BOMRepository #lightblue
+
+alt Product
+
+  SpecifyBOMUI -> BOMController : create()
+  activate BOMController
+  database ProductRepository #lightblue
+  BOMController -> PersistenceContext : repositories()
+  PersistenceContext -> ProductRepository : allProducts()
+  SpecifyBOMUI -> SpecifyBOMUI : show()
+  SpecifyBOMUI -> BOMController : selectProduct()
+  BOMController -> ProductRepository : prod = findProduct()
+  SpecifyBOMUI -> BOMController : selectQuantity()
+  BOMController -> BOMController : specifyItemBOM(quantity, prod)
+  BOMController -> BOM : newItemBOM = create(quantity, prod)
+  BOMController -> PersistenceContext : repositories()
+  activate PersistenceContext
+  PersistenceContext -> RepositoryFactory : repositories()
+  deactivate PersistenceContext
+  RepositoryFactory -> BOMRepository : create()
+  BOMController -> BOMRepository : save(newItemBOM)
+  BOMController --> SpecifyBOMUI
+  SpecifyBOMUI --> FloorManager : request confirm
+  FloorManager -> SpecifyBOMUI : confirms
+  SpecifyBOMUI --> FloorManager : Successful Operation
+  deactivate BOMController
+
+else Material
+
+  SpecifyBOMUI -> BOMController : create()
+  activate BOMController
+  database RawMaterialRepository #lightblue
+  BOMController -> PersistenceContext : repositories()
+  PersistenceContext -> RawMaterialRepository : allMaterials()
+  SpecifyBOMUI -> SpecifyBOMUI : show()
+  SpecifyBOMUI -> BOMController : selectMaterial()
+  BOMController -> RawMaterialRepository : mat = findMaterial()
+  SpecifyBOMUI -> BOMController : selectQuantity()
+  BOMController -> BOMController : specifyItemBOM(quantity, mat)
+  BOMController -> BOM : newItemBOM = create(quantity, mat)
+  BOMController -> PersistenceContext : repositories()
+  activate PersistenceContext
+  PersistenceContext -> RepositoryFactory : repositories()
+  deactivate PersistenceContext
+  RepositoryFactory -> BOMRepository : create()
+  BOMController -> BOMRepository : save(newItemBOM)
+  BOMController --> SpecifyBOMUI
+  SpecifyBOMUI --> FloorManager : request confirm
+  FloorManager -> SpecifyBOMUI : confirms
+  SpecifyBOMUI --> FloorManager : Successful Operation
+  deactivate BOMController
+
+end
+@enduml

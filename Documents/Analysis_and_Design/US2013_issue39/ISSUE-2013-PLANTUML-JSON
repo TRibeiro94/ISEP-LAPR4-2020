@@ -1,0 +1,33 @@
+@startuml
+scale 1280*720
+actor ProductionManager #lightblue
+
+ProductionManager -> XMLtoJSONUI : starts XML transformer to HTML file
+activate XMLtoJSONUI
+control XMLtoJSONController
+
+
+XMLtoJSONUI --> XMLtoJSONUI : show
+XMLtoJSONUI -> XMLtoJSONController : transformXMLintoJSON(String jsonFile)
+activate XMLtoJSONController
+activate XMLToJSONTransformer
+XMLtoJSONController -> XMLToJSONTransformer : create()
+XMLToJSONTransformer -> XMLToJSONTransformer : String XMLtoString = read(XMLFile)
+XMLToJSONTransformer -> XMLToJSONTransformer : convertXMLToJSON(jsonFile, XMLtoString)
+activate JSONObject
+XMLToJSONTransformer -> JSONObject : jsonObj = create(XMLtoString)
+JSONObject --> JSONObject : jsonString = toString(jsonObj)
+
+activate FileWriter
+deactivate JSONObject
+XMLToJSONTransformer -> FileWriter : create()
+deactivate JSONObject
+FileWriter --> FileWriter : write(jsonFile)
+FileWriter --> FileWriter : close()
+
+FileWriter --> JSONObject :
+JSONObject --> XMLToJSONTransformer :
+XMLToJSONTransformer --> XMLtoJSONController :
+XMLtoJSONController --> XMLtoJSONUI :
+XMLtoJSONUI --> ProductionManager : "Successful Operation"
+@enduml

@@ -1,0 +1,38 @@
+@startuml
+scale 1280*720
+actor ProductionManager #lightblue
+
+ProductionManager -> XMLtoTXTUI : starts XML transformer to TXT file
+activate XMLtoTXTUI
+control XMLtoTXTController
+
+
+XMLtoTXTUI --> XMLtoTXTUI : show
+XMLtoTXTUI -> XMLtoTXTController : transformXMLintoTXT(String txtFile)
+activate XMLtoTXTController
+activate XMLToTXTTransformer
+
+XMLtoTXTController -> XMLToTXTTransformer : create()
+activate File
+XMLToTXTTransformer -> File : fileXML = create()
+XMLToTXTTransformer -> File : fileXSL = create()
+XMLToTXTTransformer --> XMLToTXTTransformer : convertXMLToTXT(fileXML,fileXSL,txtFile)
+deactivate File
+
+XMLToTXTTransformer -> DocumentBuilderFactory : factory = create()
+activate DocumentBuilder
+XMLToTXTTransformer -> DocumentBuilder : builder = create(factory)
+DocumentBuilder -> Document: sourceXML = parse(fileXML)
+XMLToTXTTransformer -> StreamSource : xsl = create(fileXSL)
+deactivate DocumentBuilder
+XMLToTXTTransformer -> Transformer : create(xsl)
+XMLToTXTTransformer -> Source: create(sourceXML)
+activate Transformer
+Source --> Transformer:
+Transformer --> Transformer : transform(sourceXML, textFile)
+
+XMLToTXTTransformer --> XMLtoTXTController :
+deactivate Transformer
+XMLtoTXTController --> XMLtoTXTUI :
+XMLtoTXTUI --> ProductionManager : "Successful Operation"
+@enduml

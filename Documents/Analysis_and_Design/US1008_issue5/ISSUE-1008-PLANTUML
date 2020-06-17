@@ -1,0 +1,29 @@
+@startuml
+scale 1280*720
+
+FactoryBootstrapper -> ProductionLineBootstrapper : create()
+activate ProductionLineBootstrapper
+FactoryBootstrapper -> ProductionLineBootstrapper : execute()
+
+control SpecifyProductionLineController
+ProductionLineBootstrapper -> ProductionLineBootstrapper : register(String code)
+activate SpecifyProductionLineController
+ProductionLineBootstrapper -> SpecifyProductionLineController : create()
+
+
+SpecifyProductionLineController -> PersistenceContext : repositories()
+
+
+database RepositoryFactory #lightblue
+PersistenceContext -> RepositoryFactory : create()
+database ProductionLineRepository #lightblue
+RepositoryFactory -> ProductionLineRepository : create()
+
+ProductionLineBootstrapper -> SpecifyProductionLineController : RegisterProductionLine(code)
+SpecifyProductionLineController -> ProductionLine : newProductionLine = create(code)
+
+
+
+SpecifyProductionLineController -> ProductionLineRepository : save(newProductionLine)
+deactivate RegisterProductionLineController
+@enduml

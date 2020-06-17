@@ -1,0 +1,43 @@
+@startuml
+scale 2048*1080
+actor FactoryFloorManager #lightblue
+
+FactoryFloorManager -> ChooseConfigFileTCPUI : starts consult of archived notifications
+activate ChooseConfigFileTCPUI
+
+
+ChooseConfigFileTCPUI -> MachineRepository : findAll()
+ChooseConfigFileTCPUI --> ChooseConfigFileTCPUI : show()
+ChooseConfigFileTCPUI -> Machine : configFile = CheckConfigFiles(selectedMachine)
+ChooseConfigFileTCPUI --> ChooseConfigFileTCPUI : show()
+control TransmitConfigFileByTCPController
+ChooseConfigFileTCPUI -> TransmitConfigFileByTCPController  : sendConfigurationFileByTCP(selectedConfigFile, selectedMachine)
+
+activate TransmitConfigFileByTCPController
+TransmitConfigFileByTCPController  -> TransmitConfigFileByTCP : create()
+activate TransmitConfigFileByTCP
+TransmitConfigFileByTCP --> TransmitConfigFileByTCP : run(selectedConfigFile, selectedMachine)
+TransmitConfigFileByTCP --> TransmitConfigFileByTCP : outData = new byte array of outgoing information
+TransmitConfigFileByTCP --> TransmitConfigFileByTCP : inData = new byte array of incoming information
+TransmitConfigFileByTCP -> INetAddress: address = create()
+TransmitConfigFileByTCP -> Socket: socket = create(address, port)
+TransmitConfigFileByTCP -> DataOutputStream : out = create(socket)
+
+TransmitConfigFileByTCP -> DataInputStream : in = create(socket)
+activate DataOutputStream
+DataOutputStream --> DataOutputStream: write(outData)
+activate DataInputStream
+DataInputStream --> DataInputStream: code = read(inData)
+deactivate DataOutputStream
+
+alt code = -1
+  DataInputStream --> ChooseConfigFileTCPUI: Error with socket
+  deactivate DataInputStream
+else code = 150
+  DataInputStream --> ChooseConfigFileTCPUI: Successfully sent and read
+else code = 151
+  DataInputStream --> ChooseConfigFileTCPUI: Unsuccessful at establishing config file
+end
+ChooseConfigFileTCPUI --> FactoryFloorManager :
+
+@enduml

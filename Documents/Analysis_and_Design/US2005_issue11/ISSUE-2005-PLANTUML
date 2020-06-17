@@ -1,0 +1,28 @@
+@startuml
+scale 1280*720
+actor ProductionManager
+ProductionManager -> ImporterUI : import()
+activate ImporterUI
+control ImportController
+ImporterUI -> ImportController : import()
+
+
+ImportController -> ReaderManager : importProducts(String fileName)
+
+ref over ReaderManager, PersistenceContext : loops while there is info in the file
+
+activate ReaderManager
+ReaderManager -> PersistenceContext : repositories()
+PersistenceContext -> RepositoryFactory : create()
+
+RepositoryFactory -> Quantity: create()
+ReaderManager -> Quantity: newQtd = create(qtd, measureUnit)
+RepositoryFactory -> Product: create()
+ReaderManager -> Product: newProd = create(code, commCode, briefD, fullD, newQtd)
+
+
+ReaderManager --> ImportController
+ImportController --> ImporterUI
+ImporterUI --> ProductionManager
+
+@enduml

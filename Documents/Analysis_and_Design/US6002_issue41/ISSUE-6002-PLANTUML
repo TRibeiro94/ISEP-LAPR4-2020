@@ -1,0 +1,29 @@
+@startuml
+scale 1280*720
+actor SMM #lightblue
+
+SMM -> SMMUI : starts machine reset
+activate SMMUI
+control SMMController
+
+SMMUI -> SMMController : resetRequest()
+activate SMMController
+SMMController -> RequestResetMachineUDP : create()
+activate RequestResetMachineUDP
+RequestResetMachineUDP --> RequestResetMachineUDP : run()
+
+RequestResetMachineUDP -> DatagramSocket: sock = new DatagramSocket()
+RequestResetMachineUDP -> DatagramPacket: udpOut = new DatagramPacket()
+RequestResetMachineUDP --> RequestResetMachineUDP : udp.send()
+RequestResetMachineUDP -> DatagramPacket: udpIn = new DatagramPacket()
+activate DatagramPacket
+DatagramPacket --> DatagramPacket : udpIn.setData()
+DatagramPacket --> RequestResetMachineUDP
+deactivate DatagramPacket
+RequestResetMachineUDP --> RequestResetMachineUDP : udp.receive(udpIn)
+
+RequestResetMachineUDP --> SMMController :
+SMMController --> SMMUI :
+SMMUI --> SMM :
+
+@enduml

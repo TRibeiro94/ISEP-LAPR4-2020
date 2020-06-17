@@ -1,0 +1,28 @@
+@startuml
+scale 1280*720
+
+FactoryBootstrapper -> DepositBootstrapper : create()
+activate DepositBootstrapper
+FactoryBootstrapper -> DepositBootstrapper : execute()
+
+control DepositController
+DepositBootstrapper -> DepositBootstrapper : register(String code)
+activate DepositController
+DepositBootstrapper -> DepositController : create()
+
+
+DepositController -> PersistenceContext : repositories()
+
+
+database RepositoryFactory #lightblue
+PersistenceContext -> RepositoryFactory : create()
+database DepositRepository #lightblue
+RepositoryFactory -> DepositRepository : create()
+
+DepositBootstrapper -> DepositController : SpecifyDeposit(code)
+DepositController -> Deposit : newDeposit = create(code)
+
+
+DepositController -> DepositRepository : save(newDeposit)
+deactivate DepositeController
+@enduml

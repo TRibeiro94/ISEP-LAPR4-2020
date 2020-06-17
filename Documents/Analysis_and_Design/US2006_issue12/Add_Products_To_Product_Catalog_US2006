@@ -1,0 +1,29 @@
+@startuml
+scale 1280*720
+
+actor ProductionManager
+
+ProductionManager -> RegisterProductUI : initiates
+activate RegisterProductUI
+RegisterProductUI -> ProductionManager : requests info(code, commercialCode, briefDescription, fullDescription)
+ProductionManager -> RegisterProductUI : enteres requested information
+
+control RegisterProductController
+RegisterProductUI -> RegisterProductController : create()
+activate RegisterProductController
+RegisterProductUI -> RegisterProductController : registerProduct(code, commercialCode, briefDescription, fullDescription)
+
+
+RegisterProductController -> PersistenceContext : repositories()
+
+
+database RepositoryFactory #lightblue
+PersistenceContext -> RepositoryFactory : create()
+database ProductRepository #lightblue
+RepositoryFactory -> ProductRepository : create()
+
+
+RegisterProductController -> Product : newProduct = create(code, commercialCode, briefDescription, fullDescription)
+RegisterProductController -> ProductRepository : save(newProduct)
+deactivate RegisterProductController
+@enduml

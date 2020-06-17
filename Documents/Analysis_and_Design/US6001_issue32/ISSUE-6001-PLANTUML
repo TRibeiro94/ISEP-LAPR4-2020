@@ -1,0 +1,35 @@
+@startuml
+scale 1280*720
+actor SMM #lightblue
+
+SMM -> SMMUI : starts consult of archived notifications
+activate SMMUI
+control SMMController
+
+SMMUI -> SMMController : monitorizeMachines()
+group 30 second timer
+activate SMMController
+SMMController -> UDPClient : create()
+activate UDPClient
+UDPClient --> UDPClient : run()
+UDPClient -> Timertask : scheduleAtFixedRate
+Timertask --> Timertask :
+UDPClient -> DatagramSocket: sock = new DatagramSocket()
+UDPClient -> DatagramPacket: udpOut = new DatagramPacket()
+UDPClient --> UDPClient : udp.send()
+UDPClient -> DatagramPacket: udpIn = new DatagramPacket()
+activate DatagramPacket
+DatagramPacket --> DatagramPacket : udpIn.setData()
+DatagramPacket --> UDPClient
+deactivate DatagramPacket
+UDPClient --> UDPClient : udp.receive(udpIn)
+end
+
+
+DatagramPacket --> UDPClient :
+UDPClient --> SMMController :
+SMMController --> SMMUI :
+SMMUI --> SMM :
+
+
+@enduml

@@ -1,0 +1,35 @@
+@startuml
+scale 1280*720
+actor ProductionManager #lightblue
+
+ProductionManager -> XMLtoHTMLUI : starts XML transformer to HTML file
+activate XMLtoHTMLUI
+control XMLtoHTMLController
+
+
+XMLtoHTMLUI --> XMLtoHTMLUI : show
+XMLtoHTMLUI -> XMLtoHTMLController : transformXMLintoHTML(String htmlFile)
+activate XMLtoHTMLController
+XMLtoHTMLController -> XMLToHTMLTransformer : create()
+activate XMLToHTMLTransformer
+activate Source
+XMLToHTMLTransformer -> Source : sourceXML = new SourceStream(XML)
+XMLToHTMLTransformer -> Source : sourceXSL = new SourceStream(XSL)
+XMLToHTMLTransformer --> XMLToHTMLTransformer : convertXMLToHTML(sourceXML, sourceXSL)
+activate FileWriter
+XMLToHTMLTransformer -> FileWriter : create(String htmlFile)
+activate TransformerFactory
+XMLToHTMLTransformer -> TransformerFactory : create()
+XMLToHTMLTransformer -> Transformer : create()
+deactivate TransformerFactory
+activate Transformer
+Transformer --> Transformer : transform(XSL)
+Transformer --> FileWriter : write()
+FileWriter --> FileWriter : close()
+deactivate Transformer
+FileWriter --> Source :
+Source --> XMLToHTMLTransformer :
+XMLToHTMLTransformer --> XMLtoHTMLController :
+XMLtoHTMLController --> XMLtoHTMLUI :
+XMLtoHTMLUI --> ProductionManager : "Successful Operation"
+@enduml

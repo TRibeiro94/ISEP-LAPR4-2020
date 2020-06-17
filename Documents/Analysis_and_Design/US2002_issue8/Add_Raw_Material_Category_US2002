@@ -1,0 +1,29 @@
+@startuml
+scale 1280*720
+
+actor ProductionManager
+
+ProductionManager -> RegisterRawMaterialCategoryUI : initiates
+activate RegisterRawMaterialCategoryUI
+RegisterRawMaterialCategoryUI -> ProductionManager : requests info(code, description)
+ProductionManager -> RegisterRawMaterialCategoryUI : enteres requested information
+
+control RegisterRawMaterialCategoryController
+RegisterRawMaterialCategoryUI -> RegisterRawMaterialCategoryController : create()
+activate RegisterRawMaterialCategoryController
+RegisterRawMaterialCategoryUI -> RegisterRawMaterialCategoryController : registerRawMaterialCategory(code, description)
+
+
+RegisterRawMaterialCategoryController -> PersistenceContext : repositories()
+
+
+database RepositoryFactory #lightblue
+PersistenceContext -> RepositoryFactory : create()
+database RawMaterialCategoryRepository #lightblue
+RepositoryFactory -> RawMaterialCategoryRepository : create()
+
+
+RegisterRawMaterialCategoryController -> RawMaterialCategory : newRawMaterialCategory = create(code, description)
+RegisterRawMaterialCategoryController -> RawMaterialCategoryRepository : save(newRawMaterialCategory)
+deactivate RegisterRawMaterialCategoryController
+@enduml

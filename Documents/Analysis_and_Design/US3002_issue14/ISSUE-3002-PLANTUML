@@ -1,0 +1,38 @@
+@startuml
+scale 1280*720
+actor FloorManager #lightblue
+
+FloorManager -> SpecifyProductionLineUI : specifyProdLine()
+activate SpecifyProductionLineUI
+control SpecifyProductionLineController
+
+SpecifyProductionLineUI -> SpecifyProductionLineController : create()
+
+activate SpecifyProductionLineController
+SpecifyProductionLineController -> PersistenceContext : repositories()
+deactivate SpecifyProductionLineController
+database RepositoryFactory #lightblue
+activate PersistenceContext
+PersistenceContext -> RepositoryFactory : create()
+deactivate PersistenceContext
+
+database ProductionLineRepository #lightblue
+activate RepositoryFactory
+RepositoryFactory -> ProductionLineRepository : create()
+deactivate RepositoryFactory
+
+activate SpecifyProductionLineController
+SpecifyProductionLineController -> SpecifyProductionLineController : specifyProductionLine(code)
+
+SpecifyProductionLineController -> ProductionLine : newProductionLine = create(code)
+
+SpecifyProductionLineController -> ProductionLineRepository : save(newProductionLine)
+
+
+SpecifyProductionLineController --> SpecifyProductionLineUI :
+SpecifyProductionLineUI --> FloorManager : Successful Operation
+
+deactivate SpecifyProductionLineUI
+
+
+@enduml

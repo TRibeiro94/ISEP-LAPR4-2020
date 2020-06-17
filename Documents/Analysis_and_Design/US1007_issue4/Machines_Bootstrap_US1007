@@ -1,0 +1,28 @@
+@startuml
+scale 1280*720
+
+FactoryBootstrapper -> MachineBootstrapper : create()
+activate MachineBootstrapper
+FactoryBootstrapper -> MachineBootstrapper : execute()
+
+control MachineController
+MachineBootstrapper -> MachineBootstrapper : register(String code, String serialNum, String desc, String brand, String model, Date date)
+activate MachineController
+MachineBootstrapper -> MachineController : create()
+
+
+MachineController -> PersistenceContext : repositories()
+
+
+database RepositoryFactory #lightblue
+PersistenceContext -> RepositoryFactory : create()
+database MachineRepository #lightblue
+RepositoryFactory -> MachineRepository : create()
+
+MachineBootstrapper -> MachineController : SpecifyMachine(machineCode, serialNum, desc, brand, model, date)
+MachineController -> Machine : newMachine = create(machineCode, serialNum, desc, brand, model, date)
+
+
+MachineController -> MachineRepository : save(newMachine)
+deactivate MachineController
+@enduml

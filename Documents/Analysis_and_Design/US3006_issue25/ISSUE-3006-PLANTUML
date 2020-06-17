@@ -1,0 +1,35 @@
+@startuml
+scale 1280*720
+
+actor FloorManager #lightblue
+
+FloorManager -> NotificationUI : Enters archive notification option
+activate NotificationUI
+control NotificationController
+
+NotificationUI -> NotificationController : archiveNotifications()
+
+activate NotificationController
+NotificationController -> NotificationServices : create()
+
+group while Manager inserts Notification IDs
+  NotificationController -> NotificationServices : archiveNotificationErrors()
+  NotificationServices -> PersistenceContext : repositories()
+  deactivate NotificationController
+  database RepositoryFactory #lightblue
+  activate PersistenceContext
+  PersistenceContext -> RepositoryFactory : create()
+  deactivate PersistenceContext
+  database NotificationRepository #lightblue
+  activate RepositoryFactory
+  RepositoryFactory -> NotificationRepository : create()
+  deactivate RepositoryFactory
+  NotificationServices -> NotificationRepository : archiveNotificationErrors()
+end
+
+NotificationController --> NotificationUI : if stop define command is chosen
+NotificationUI --> FloorManager : Successful Operation
+
+deactivate NotificationUI
+
+@enduml

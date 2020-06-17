@@ -1,0 +1,31 @@
+@startuml
+scale 1280*720
+
+SCM -> CollectMachineMessages : create()
+activate CollectMachineMessages
+SCM -> CollectMachineMessages : run()
+activate SSLServerSocket
+CollectMachineMessages -> SSLServerSocket : sock = new ServerSocket()
+activate Socket
+CollectMachineMessages -> Socket : cliSock = create()
+deactivate SSLServerSocket
+deactivate Socket
+activate System
+CollectMachineMessages -> System : setProperty(trustStoreClient)
+CollectMachineMessages -> System : setProperty(trustStorePasswordClient)
+CollectMachineMessages -> System : setProperty(keyStore)
+CollectMachineMessages -> System : setProperty(keystorePassword)
+deactivate System
+activate SSLServerSocketFactory
+CollectMachineMessages -> SSLServerSocketFactory : ssf = create()
+activate SSLServerSocket
+
+SSLServerSocketFactory --> SSLServerSocket
+deactivate SSLServerSocketFactory
+SSLServerSocket --> SSLServerSocket : createServerSocker(port)
+SSLServerSocket --> SSLServerSocket : setClientAuthentication(true)
+
+CollectMachineMessages -> Socket : cliSock = sock.accept()
+deactivate SSLServerSocket
+CollectMachineMessages --> SCM
+@enduml

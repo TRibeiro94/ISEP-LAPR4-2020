@@ -1,0 +1,34 @@
+@startuml
+scale 1280*720
+
+SCM -> SCMTcpServer : create()
+activate SCMTcpServer
+SCM -> SCMTcpServer : run()
+
+SCMTcpServer -> SCMTcpServer : sock = new ServerSocket()
+SCMTcpServer -> SCMTcpServer : cliSock = sock.accept()
+
+SCMTcpServer -> MessageCollection : create()
+activate MessageCollection
+SCMTcpServer -> MessageCollection : run()
+
+control MessageController
+MessageCollection -> MessageController : create
+activate MessageController
+MessageCollection -> MessageController : registMessage(origin, creationDate)
+
+
+MessageController -> PersistenceContext : repositories()
+
+
+database RepositoryFactory #lightblue
+PersistenceContext -> RepositoryFactory : create()
+database MessageRepository #lightblue
+RepositoryFactory -> MessageRepository : create()
+
+MessageController -> Message : newMessage = create(origin, creationDate)
+
+
+MessageController -> MessageRepository : save(newMessage)
+deactivate MessageController
+@enduml
