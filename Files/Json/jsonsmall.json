@@ -1,0 +1,74 @@
+{"factory": {"machines": {"machine": [
+    {
+        "code": 1,
+        "serialNumber": 612121,
+        "installDate": "2020-06-06 14:21:38.147",
+        "machinePosition": {
+            "productionLine": "PRODUCTION_LINE_1",
+            "position": 12
+        },
+        "description": "Machine1",
+        "model": "Model1",
+        "brand": "Brand1"
+    },
+    {
+        "code": 2,
+        "serialNumber": 13212311111,
+        "installDate": "2020-06-06 14:21:38.155",
+        "machinePosition": {
+            "productionLine": "PRODUCTION_LINE_2",
+            "position": 24
+        },
+        "description": "Machine2",
+        "model": "Model2",
+        "brand": "Brand2"
+    },
+    {
+        "code": 3,
+        "serialNumber": 23424123,
+        "installDate": "2020-06-06 14:21:38.158",
+        "machinePosition": {
+            "productionLine": "PRODUCTION_LINE_3",
+            "position": 5
+        },
+        "description": "Machine3",
+        "model": "Model3",
+        "brand": "Brand3"
+    },
+    {
+        "code": 4,
+        "serialNumber": 234549373,
+        "installDate": "2020-06-06 14:21:38.161",
+        "machinePosition": {
+            "productionLine": "PRODUCTION_LINE_1",
+            "position": 6
+        },
+        "description": "Machine4",
+        "model": "Model4",
+        "brand": "Brand4"
+    },
+    {
+        "code": 5,
+        "serialNumber": 29283637383,
+        "installDate": "2020-06-06 14:21:38.166",
+        "machinePosition": {
+            "productionLine": "PRODUCTION_LINE_2",
+            "position": 1
+        },
+        "description": "Machine5",
+        "model": "Model5",
+        "brand": "Brand5"
+    },
+    {
+        "code": 6,
+        "serialNumber": 220292929,
+        "installDate": "2020-06-06 14:21:38.174",
+        "machinePosition": {
+            "productionLine": "PRODUCTION_LINE_3",
+            "position": 2
+        },
+        "description": "Machine6",
+        "model": "Model6",
+        "brand": "Brand6"
+    }
+]}}}
