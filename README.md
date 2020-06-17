@@ -1,6 +1,6 @@
 # ISEP-LAPR4-2020
 
-<img align="left" width="350" height="" src="/Files/isep_logo.png">
+<img align="left" width="200" height="" src="/Files/isep_logo.png">
 
 Projecto Integrador de LAPR4
 
