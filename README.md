@@ -1,4 +1,7 @@
 # ISEP-LAPR4-2020
+
+<img align="left" width="100" height="" src="/Files/isep_logo.png">
+
 Projecto Integrador de LAPR4
 
 ----------------------------
@@ -49,3 +52,9 @@ Projecto Integrador de LAPR4
 | US6002 | [Send Reset Request by TCP Protocol](Documents/Analysis_and_Design/US6002_issue41/SMM_Request_Machine_Reset_US_6002.md) |
 
 ----------------------------------------------------------------------
+
+### Documentos
+
+* [Enunciado](Statements/enunciado.pdf)
+* [Protocolo Comunicação](Statements/protocolo_comunicacao.pdf)
+* [Deployment do Projeto](Statements/project_deploy.pdf)
