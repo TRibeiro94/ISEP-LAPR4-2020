@@ -1,0 +1,12 @@
+eapli\base\productionlinemanagement\domain\ProductionLineTest.class
+eapli\base\rawmaterialmanagement\domain\RawMaterialTest.class
+eapli\base\productmanagement\domain\BillOfMaterialsTest.class
+eapli\base\clientusermanagement\domain\ClientUserTest.class
+eapli\base\depositsmanagement\domain\DepositTest.class
+eapli\base\depositsmanagement\application\DepositControllerTest.class
+eapli\base\machinemanagement\domain\MachineTest.class
+eapli\base\machinemanagement\domain\SerialNumberTest.class
+eapli\base\productmanagement\domain\ProductTest.class
+eapli\base\productionlinemanagement\application\SpecifyProductionLineControllerTest.class
+eapli\base\rawmaterialmanagement\domain\RawMaterialCategoryTest.class
+eapli\base\productionlinemanagement\domain\MachinePositionTest.class

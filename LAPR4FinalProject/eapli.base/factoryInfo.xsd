@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="factory" type="factoryType"/>
+
+    <xsd:complexType name="factoryType">
+        <xsd:sequence>
+            <xsd:element type="machinesType" name="machines"/>
+            <xsd:element type="rawMaterialsType" name="rawMaterials"/>
+            <xsd:element type="prodOrdersType" name="prodOrders"/>
+            <xsd:element type="depositsType" name="deposits"/>
+            <xsd:element type="productsType" name="products"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="machinesType">
+        <xsd:sequence>
+            <xsd:element type="machineType" name="machine" maxOccurs="unbounded" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="machineType">
+        <xsd:sequence>
+            <xsd:element name="code">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:integer">
+                        <xsd:pattern value="[0-9]+"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="brand">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:minLength value="1"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="model">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="(Model)[0-9]+"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="installDate">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:minLength value="1"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="description">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="(Machine)[0-9]+"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="serialNumber">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:integer">
+                        <xsd:pattern value="[0-9]+"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element type="machinePositionType" name="machinePosition"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="machinePositionType">
+        <xsd:sequence>
+            <xsd:element name="productionLine">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:minLength value="1"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="position">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:integer">
+                        <xsd:pattern value="[0-9]+"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="rawMaterialsType">
+        <xsd:sequence>
+            <xsd:element type="rawMaterialType" name="rawMaterial" maxOccurs="unbounded" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="rawMaterialType">
+        <xsd:sequence>
+            <xsd:element name="code">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="(AB)[0-9]+"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="technicalSheet">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="(Tech)[0-9]+"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="description">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="(CAT)[0-9]+"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element type="categoryType" name="category"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="categoryType">
+        <xsd:sequence>
+            <xsd:element name="id">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="(AB)[0-9]+"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="categoryDescription">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="(Cat)[0-9]+"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="prodOrdersType">
+        <xsd:sequence>
+            <xsd:element type="ProductionOrderType" name="ProductionOrder" maxOccurs="unbounded" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ProductionOrderType">
+        <xsd:sequence>
+            <xsd:element name="code">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:minLength value="1"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="EmissionDate">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:date">
+                        <xsd:pattern value="[0-9]{4}-[0-9]{2}-[0-9]{2}"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="ExpectedDate">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:date">
+                        <xsd:pattern value="[0-9]{4}-[0-9]{2}-[0-9]{2}"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="ProductCode">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:minLength value="1"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="Quantity">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:integer">
+                        <xsd:pattern value="[0-9]+"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element type="xsd:string" name="Unit"/>
+            <xsd:element name="ReqCodes">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:minLength value="1"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="depositsType">
+        <xsd:sequence>
+            <xsd:element type="depositType" name="deposit" maxOccurs="unbounded" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="depositType">
+        <xsd:sequence>
+            <xsd:element name="code">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="DEPOSIT(_)[0-9]+"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="description">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:minLength value="1"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="productsType">
+        <xsd:sequence>
+            <xsd:element type="productType" name="product" maxOccurs="unbounded" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="productType">
+        <xsd:sequence>
+            <xsd:element name="code">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="(product)[0-9]+"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="commercialCode">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="(Prod)[0-9]+"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="briefDescription">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="(PR)[0-9]+"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="fullDescription">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:minLength value="1"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="category">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:minLength value="1"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element type="xsd:string" name="measureUnit"/>
+            <xsd:element name="existenceOfBOM">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="true|false"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element type="billOfMaterialsType" name="billOfMaterials"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="billOfMaterialsType" mixed="true">
+        <xsd:sequence>
+            <xsd:element name="identity">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:integer">
+                        <xsd:pattern value="[0-9]+"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="id">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:pattern value="(AB)[0-9]+"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="quantity">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:integer">
+                        <xsd:pattern value="[0-9]+"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="measureUnit">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:minLength value="1"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element type="xsd:string" name="billOfMaterialsType" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>
