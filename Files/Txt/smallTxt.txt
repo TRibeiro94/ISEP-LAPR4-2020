@@ -1,0 +1,42 @@
+factory
+
+
+machines
+
+
+machine
+code,brand,model,installDate,description,serialNumber
+1,Brand1,Model1,2020-06-04 12:36:12.322,Machine1,612121
+machinePosition
+productionLine,position
+PRODUCTION_LINE_1,12
+machine
+code,brand,model,installDate,description,serialNumber
+2,Brand2,Model2,2020-06-04 12:36:12.33,Machine2,13212311111
+machinePosition
+productionLine,position
+PRODUCTION_LINE_2,24
+machine
+code,brand,model,installDate,description,serialNumber
+3,Brand3,Model3,2020-06-04 12:36:12.335,Machine3,23424123
+machinePosition
+productionLine,position
+PRODUCTION_LINE_3,5
+machine
+code,brand,model,installDate,description,serialNumber
+4,Brand4,Model4,2020-06-04 12:36:12.339,Machine4,234549373
+machinePosition
+productionLine,position
+PRODUCTION_LINE_1,6
+machine
+code,brand,model,installDate,description,serialNumber
+5,Brand5,Model5,2020-06-04 12:36:12.344,Machine5,29283637383
+machinePosition
+productionLine,position
+PRODUCTION_LINE_2,1
+machine
+code,brand,model,installDate,description,serialNumber
+6,Brand6,Model6,2020-06-04 12:36:12.349,Machine6,220292929
+machinePosition
+productionLine,position
+PRODUCTION_LINE_3,2
