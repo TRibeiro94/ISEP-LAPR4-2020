@@ -2,6 +2,6 @@
 
 ---------------------------------------
 
-![dm.png](dm.png)
+![domainModel.png](domainModel.png)
 
 
