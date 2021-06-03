@@ -58,3 +58,12 @@ Projecto Integrador de LAPR4
 * [Enunciado](Statements/enunciado.pdf)
 * [Protocolo Comunicação](Statements/protocolo_comunicacao.pdf)
 * [Deployment do Projeto](Statements/project_deploy.pdf)
+
+----------------------------------------------------------------------
+Este foi o grupo com o qual concluí esta unidade curricular:
+| Nome               |
+| ------------------ |
+| Tiago Ribeiro      |
+| Bruno Magalhães    |
+| Pedro Água         |
+| Bernardo Carvalho  |
