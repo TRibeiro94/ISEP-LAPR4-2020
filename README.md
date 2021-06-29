@@ -69,11 +69,3 @@ Este foi o grupo com o qual concluí esta unidade curricular:
 | Bernardo Carvalho  |
 
 ---------------------------------
-
-### Classificação Final
-
-|                  | Nota:|
-|:-----------      |:-----|
-|**Projeto**       |19.10 |
-
----------------------------------
