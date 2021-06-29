@@ -67,3 +67,13 @@ Este foi o grupo com o qual concluí esta unidade curricular:
 | Bruno Magalhães    |
 | Pedro Água         |
 | Bernardo Carvalho  |
+
+---------------------------------
+
+### Classificação Final
+
+|                  | Nota:|
+|:-----------      |:-----|
+|**Projeto**       |19.10 |
+
+---------------------------------
